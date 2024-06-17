@@ -16,11 +16,17 @@ namespace TestePraticoDev.Controllers
             _pedidoService = pedidoService;
         }
 
+        //GET /api/pedidos
+        //Retorna a lista de todos os pedidos.
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             return View(await _pedidoService.GetAll());
         }
 
+        //GET /api/pedidos/{id} 
+        //Retorna os detalhes de um pedido específico, incluindo os itens do pedido.
+        [HttpGet]
         public async Task<IActionResult> Detalhes(int id)
         {
             var pedido = await _pedidoService.GetPedidoById(id);
@@ -35,6 +41,7 @@ namespace TestePraticoDev.Controllers
             return View(pedido);
         }
 
+        //POST /api/pedidos - Adiciona um novo pedido.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PedidoViewModel pedido)
@@ -49,19 +56,21 @@ namespace TestePraticoDev.Controllers
                 await _pedidoService.Insert(pedido);
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                //tratar excessão
                 return View();
             }
         }
 
-        public async Task <IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             var pedido = await _pedidoService.GetPedidoById(id);
             pedido.ItensPedido = await _pedidoService.GetItensPedidoById(id);
             return View(pedido);
         }
+
+        //PUT /api/pedidos/{id} 
+        //Atualiza um pedido existente. (Decidi manter em POST pois faz mais sentido de acordo com o MVC)
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -88,6 +97,7 @@ namespace TestePraticoDev.Controllers
             return View(await _pedidoService.GetPedidoById(id));
         }
 
+        //DELETE /api/pedidos/{id} - Remove um pedido
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(PedidoViewModel pedido)
