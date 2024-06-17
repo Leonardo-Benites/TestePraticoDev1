@@ -34,6 +34,7 @@ namespace TestePraticoDev.Controllers
             return View(pedido);
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             var pedido = new PedidoViewModel();
@@ -62,6 +63,7 @@ namespace TestePraticoDev.Controllers
             }
         }
 
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var pedido = await _pedidoService.GetPedidoById(id);
