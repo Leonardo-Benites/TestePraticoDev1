@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Routing
+@model List<TestePraticoDev.ViewModels.PedidoViewModel>
+
+@{
+    Layout = "_Layout";
+}
+
+<head>
+
+    <title>
+        Criação de Pedido
+    </title>
+
+</head>
+
+<body>
+    <div>
+        <h3> Pedidos </h3>
+    </div>
+
+    <div>
+        <button type="submit" onclick="location.href='@Url.Action("Create", "Pedido")'" class="btn btn-default"> Criar novo Pedido </button>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>Código</th>
+            <th>Nome do Cliente</th>
+            <th>Data de criação</th>
+            <th>Valor</th>
+        </tr>
+
+        @foreach (var pedido in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => pedido.Id)</td>
+                <td>@Html.DisplayFor(model => pedido.NomeCliente)</td>
+                <td>@Html.DisplayFor(model => pedido.Data)</td>
+                <td>@Html.DisplayFor(model => pedido.ValorTotal)</td>
+                
+                <td>
+                    <button type="submit" onclick="location.href='@Url.Action("Edit", "Pedido",
+                    new RouteValueDictionary(new { id = pedido.Id }))'" class="btn btn-default">
+                        Editar
+                    </button>
+                </td>
+                <td>
+                    <button type="submit" onclick="location.href='@Url.Action("Delete", "Pedido",
+                    new RouteValueDictionary(new { id = pedido.Id }))'" class="btn btn-default">
+                        Excluir
+                    </button>
+                </td>
+            </tr>
+        }
+    </table>
+</body>
+

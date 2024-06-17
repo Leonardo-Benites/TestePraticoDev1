@@ -1,0 +1,93 @@
+﻿@model TestePraticoDev.ViewModels.PedidoViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+<head>
+
+    <title>
+        Criar Pedido
+    </title>
+
+</head>
+
+<body>
+    <div>
+        <h3> Criar um novo Pedido </h3>
+    </div>
+
+    @using (Html.BeginForm("Create", "Pedido", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NomeCliente, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NomeCliente, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NomeCliente, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control", @placeholder = "dd/MM/yyyy" } })
+                    @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ValorTotal, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ValorTotal, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ValorTotal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.QuantidadeItens, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" onclick="decrementarQuantidade()">-</button>
+                        </span>
+                        @Html.EditorFor(model => model.QuantidadeItens, new { htmlAttributes = new { @class = "form-control text-center", @readonly = "readonly" } })
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" onclick="incrementarQuantidade()">+</button>
+                        </span>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.QuantidadeItens, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" onclick="location.href='@Url.Action("Create", "Pedido")'" class="btn btn-default"> Salvar </button>
+                </div>
+            </div>
+        </div>
+    }
+</body>
+
+<div>
+    @Html.ActionLink("Voltar a página principal", "Index")
+</div>
+
+<script>
+    // Funções para incrementar e decrementar a quantidade
+    function incrementarQuantidade() {
+        var quantidade = parseInt($('#QuantidadeItens').val());
+        $('#QuantidadeItens').val(quantidade + 1);
+    }
+
+    function decrementarQuantidade() {
+        var quantidade = parseInt($('#QuantidadeItens').val());
+        if (quantidade > 1) {
+            $('#QuantidadeItens').val(quantidade - 1);
+        }
+    }
+</script>
