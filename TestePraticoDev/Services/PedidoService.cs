@@ -60,52 +60,22 @@ namespace TestePraticoDev.Services
             await _pedidoRepository.Delete(pedido);
         }
 
-        private List<ItemPedidoViewModel> RemoverItemPedido(int quantidadeRemover, List<ItemPedidoViewModel> itensPedido)
-        {
-            for (int i = 0; i < quantidadeRemover; i++)
-            {
-                itensPedido.Remove(itensPedido[i]);
-            }
-
-            return itensPedido;
-        }
-
         private static List<ItemPedidoViewModel> GerarItemPedidoAleatorio(int quantidade)
         {
             string[] produtos = { "Produto A", "Produto B", "Produto C", "Produto D", "Produto E" };
             
-            var itensPedido = new List<ItemPedidoViewModel>(); 
-            
-            for (int i = 0; i < quantidade; i++)
-            {
-                var itemPedido = new ItemPedidoViewModel
-                {
-                    Id = random.Next(1, 1000), // Id aleatório entre 1 e 1000
-                    NomeProduto = produtos[random.Next(produtos.Length)], // Produto aleatório da lista
-                    QuantidadeProduto = random.Next(1, 10), // Quantidade aleatória entre 1 e 10
-                    Valor = Math.Round((decimal)(random.NextDouble() * 100), 2), // Valor aleatório entre 0.00 e 100.00
-                };
-
-                itensPedido.Add(itemPedido);
-            }
-
-            return itensPedido;
-        }
-
-        private static List<ItemPedidoViewModel> AtualizaItemPedidoAleatorio(int quantidade)
-        {
-            string[] produtos = { "Produto A", "Produto B", "Produto C", "Produto D", "Produto E" };
-
             var itensPedido = new List<ItemPedidoViewModel>();
+            decimal valorDefault = 500;
 
             for (int i = 0; i < quantidade; i++)
             {
+
                 var itemPedido = new ItemPedidoViewModel
                 {
-                    Id = random.Next(1, 1000), // Id aleatório entre 1 e 1000
-                    NomeProduto = produtos[random.Next(produtos.Length)], // Produto aleatório da lista
-                    QuantidadeProduto = random.Next(1, 10), // Quantidade aleatória entre 1 e 10
-                    Valor = Math.Round((decimal)(random.NextDouble() * 100), 2), // Valor aleatório entre 0.00 e 100.00
+                    Id = random.Next(1, 1000), 
+                    NomeProduto = produtos[random.Next(produtos.Length)], 
+                    Quantidade = 1, 
+                    Valor = valorDefault, 
                 };
 
                 itensPedido.Add(itemPedido);
@@ -113,6 +83,5 @@ namespace TestePraticoDev.Services
 
             return itensPedido;
         }
-
     }
 }

@@ -1,5 +1,39 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model TestePraticoDev.ViewModels.PedidoViewModel
+
 @{
+    Layout = "_Layout";
+    ViewBag.Title = "Detalhes do Pedido";
 }
+
+<div>
+    <h2>Detalhes do Pedido</h2>
+</div>
+
+<div>
+    <h4>ID Pedido - @Model.Id</h4>
+    <h4>Cliente - @Model.NomeCliente</h4>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome do Produto</th>
+            <th>Quantidade</th>
+            <th>Valor Unitário</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ItensPedido)
+        {
+            <tr>
+                <td>@item.NomeProduto</td>
+                <td>@item.Quantidade</td>
+                <td>@item.Valor.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    @Html.ActionLink("Voltar à Lista de Pedidos", "Index")
+</div>

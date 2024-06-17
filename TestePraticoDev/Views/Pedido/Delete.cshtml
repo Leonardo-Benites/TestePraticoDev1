@@ -18,48 +18,53 @@
         <h3> Excluir Pedido </h3>
     </div>
 
-
     @using (Html.BeginForm("Delete", "Pedido", FormMethod.Post))
     {
         @Html.HiddenFor(model => model.Id)
-
         @Html.AntiForgeryToken()
-        <div class="form-horizontal">
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.NomeCliente, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DisplayFor(model => model.NomeCliente, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.NomeCliente, "", new { @class = "text-danger" })
+        <fieldset disabled>
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.NomeCliente, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NomeCliente, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.NomeCliente, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control", @placeholder = "dd/MM/yyyy", disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.ValorTotal, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ValorTotal, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.ValorTotal, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control", @placeholder = "dd/MM/yyyy" } })
-                    @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
+        </fieldset>
+        <br>
+        <div>
+            <div class="form-group row">
+                <div class="col-md-offset-2 col-md-6" style="margin-left: 1200px">
+                    <button type="submit" onclick="location.href='@Url.ActionLink("Home", "Index")'" class="btn btn-outline-danger"> Confirmar Exclusão </button>
                 </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.ValorTotal, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DisplayFor(model => model.ValorTotal, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ValorTotal, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <button type="submit" onclick="location.href='@Url.Action("Delete", "Pedido", new RouteValueDictionary(new { id = Model.Id }))'" class="btn btn-default"> Excluir </button>
+                <div class="col-md-offset-2 col-md-6">
+                    @Html.ActionLink("Voltar a página principal", "Index")
                 </div>
             </div>
         </div>
+
     }
 </body>
 
-<div>
-    @Html.ActionLink("Voltar a página principal", "Index")
-</div>

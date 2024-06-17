@@ -6,11 +6,9 @@
 }
 
 <head>
-
     <title>
         Criação de Pedido
     </title>
-
 </head>
 
 <body>
@@ -19,7 +17,7 @@
     </div>
 
     <div>
-        <button type="submit" onclick="location.href='@Url.Action("Create", "Pedido")'" class="btn btn-default"> Criar novo Pedido </button>
+        <button type="submit" onclick="location.href='@Url.Action("Create", "Pedido")'" class="btn btn-primary"> Criar novo Pedido </button>
     </div>
 
     <table class="table">
@@ -28,6 +26,9 @@
             <th>Nome do Cliente</th>
             <th>Data de criação</th>
             <th>Valor</th>
+            <th></th>
+            <th></th>
+            <th></th>
         </tr>
 
         @foreach (var pedido in Model)
@@ -37,16 +38,22 @@
                 <td>@Html.DisplayFor(model => pedido.NomeCliente)</td>
                 <td>@Html.DisplayFor(model => pedido.Data)</td>
                 <td>@Html.DisplayFor(model => pedido.ValorTotal)</td>
-                
+
+                <td>
+                    <button type="submit" onclick="location.href='@Url.Action("Detalhes", "Pedido",
+                    new RouteValueDictionary(new { id = pedido.Id }))'" class="btn btn-info">
+                        Detalhes
+                    </button>
+                </td>
                 <td>
                     <button type="submit" onclick="location.href='@Url.Action("Edit", "Pedido",
-                    new RouteValueDictionary(new { id = pedido.Id }))'" class="btn btn-default">
+                    new RouteValueDictionary(new { id = pedido.Id }))'" class="btn btn-primary">
                         Editar
                     </button>
                 </td>
                 <td>
                     <button type="submit" onclick="location.href='@Url.Action("Delete", "Pedido",
-                    new RouteValueDictionary(new { id = pedido.Id }))'" class="btn btn-default">
+                    new RouteValueDictionary(new { id = pedido.Id }))'" class="btn btn-danger">
                         Excluir
                     </button>
                 </td>

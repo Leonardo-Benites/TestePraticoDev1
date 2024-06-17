@@ -21,7 +21,6 @@ namespace TestePraticoDev.ViewModels
         [Required(ErrorMessage = "O valor é obrigatório.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "O valor deve ser maior que zero.")]
         public decimal ValorTotal { get; set; }
-
         public int QuantidadeItens { get; set; }
 
         public List<ItemPedidoViewModel>? ItensPedido { get; set; }
@@ -32,7 +31,7 @@ namespace TestePraticoDev.ViewModels
         public int Id { get; set; }
         public int PedidoId { get; set; }
         public string? NomeProduto { get; set; }
-        public int QuantidadeProduto { get; set; }
-        public decimal Valor { get; set; }
+        public int Quantidade { get; set; }
+        public decimal Valor { get; set; } //preço produto
     }
 }

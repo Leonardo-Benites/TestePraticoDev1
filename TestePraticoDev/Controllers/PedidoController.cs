@@ -21,14 +21,18 @@ namespace TestePraticoDev.Controllers
             return View(await _pedidoService.GetAll());
         }
 
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Detalhes(int id)
         {
-            return View();
+            var pedido = await _pedidoService.GetPedidoById(id);
+            pedido.ItensPedido = await _pedidoService.GetItensPedidoById(id);
+            return View(pedido);
         }
 
         public ActionResult Create()
         {
-            return View(new PedidoViewModel());
+            var pedido = new PedidoViewModel();
+            pedido.Data = DateTime.Now;
+            return View(pedido);
         }
 
         [HttpPost]
@@ -56,7 +60,6 @@ namespace TestePraticoDev.Controllers
         {
             var pedido = await _pedidoService.GetPedidoById(id);
             pedido.ItensPedido = await _pedidoService.GetItensPedidoById(id);
-            pedido.QuantidadeItens = pedido.ItensPedido.Count;
             return View(pedido);
         }
 
